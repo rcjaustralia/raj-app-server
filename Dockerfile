@@ -9,6 +9,9 @@ RUN yum upgrade -y && \
 
 WORKDIR /app
 
+RUN pip3.6 install -U pip setuptools && \
+    pip install -U pip setuptools
+
 COPY requirements.txt /app/requirements.txt
 RUN pip3.6 install -r /app/requirements.txt && rm -f /app/requirements.txt
 
