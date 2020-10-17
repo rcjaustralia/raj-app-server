@@ -23,3 +23,11 @@ podman run --restart always --pod rcj \
 ```
 
 To run in production, substitute *your@email.com*, *YOUR_VULTR_API_KEY* with an API key from Vultr (used for DNS as the acme challenge for Lets Encrypt) and set *USE_STAGING* to *no*.
+
+You may also need to open ports 80 and 443 in the firewall:
+
+```bash
+sudo firewall-cmd --zone=public --add-service=http --permanent
+sudo firewall-cmd --zone=public --add-service=https --permanent
+sudo firewall-cmd --reload
+```
