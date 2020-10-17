@@ -1,7 +1,7 @@
 FROM centos:7
 
 RUN yum upgrade -y && \
-    yum install -y https://centos7.iuscommunity.org/ius-release.rpm && \
+    yum install -y https://repo.ius.io/ius-release-el7.rpm epel-release && \
     yum install -y python36u python36u-devel python36u-pip nginx && \
     yum install -y python2-pip python-devel && \
     mkdir -p /app && \
