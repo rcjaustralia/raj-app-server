@@ -188,7 +188,14 @@ def start_nginx(domains):
     with open("/etc/nginx/nginx.conf", "r") as f:
         print(f.read())
 
-    subprocess.run(["nginx"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    proc = subprocess.run(["nginx"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    if proc.returncode != 0:
+        logger.error("Could not start NGINX")
+        print(proc)
+        return
+      
+    while True:
+        time.sleep(1)
 
 
 if __name__ == "__main__":
