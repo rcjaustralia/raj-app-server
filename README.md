@@ -14,7 +14,12 @@ docker build -t proxy .
 Or just run the pre-compiled version on Docker Hub:
 
 ```bash
-docker run --restart always -d -e "CERT_EMAIL=your@email.com" -e "DOMAINS_SOCCER=soccer.rcja.org:soccer.rcj.org.au" -e "VULTR_API_KEY=YOUR_VULTR_API_KEY" -e "USE_STAGING=yes" --link rcj_soccer:rcj_soccer -p 80:80 -p 443:443 --name rcj_proxy rcjaustralia/rcj-app-server
+podman run --restart always --pod rcj \
+           -d -e "CERT_EMAIL=your@emailaddr.com" \
+           -e "DOMAINS_SOCCER=soccer.rcja.org" \
+           -e "VULTR_API_KEY=YOUR_VULTR_API_KEY" \
+           -e "USE_STAGING=yes" \
+           --name rcj_proxy rcjaustralia/rcj-app-server
 ```
 
 To run in production, substitute *your@email.com*, *YOUR_VULTR_API_KEY* with an API key from Vultr (used for DNS as the acme challenge for Lets Encrypt) and set *USE_STAGING* to *no*.
