@@ -179,13 +179,9 @@ def generate_cert(domain):
         return False
 
 
-def get_rcj_server():
-    return socket.gethostbyname("rcj_soccer")
-
-
-def start_nginx():
+def start_nginx(domains):
     with open("/etc/nginx/nginx.conf", "r") as f:
-        contents = f.read().replace("$RCJ_SOCCER$", get_rcj_server())
+        contents = f.read().replace("$DOMAIN$", ", ".join(domains.keys()))
     with open("/etc/nginx/nginx.conf", "w") as f:
         f.write(contents)
 
@@ -198,4 +194,4 @@ def start_nginx():
 if __name__ == "__main__":
     domains = parse_domains()
     generate_certs(domains)
-    start_nginx()
+    start_nginx(domains)
